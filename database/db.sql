@@ -12,17 +12,13 @@ CREATE TABLE student(
     surname VARCHAR(255) NOT NULL,
     birthdate DATE,
     age INT 
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- DESCRIBE student;
 
 CREATE TABLE course(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description VARCHAR(400),
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(400)
 );
 -- DESCRIBE course;
 
@@ -31,9 +27,7 @@ CREATE TABLE studentcourses(
     student_id INT NOT NULL,
     course_id INT NOT NULL,
     FOREIGN KEY (student_id) REFERENCES student(id),
-    FOREIGN KEY (course_id) REFERENCES course(id),
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (course_id) REFERENCES course(id)
 );
 
 
