@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { pool } from "../../../../../libs/mysql";
+import { pool } from "@/libs/mysql";
 
 export async function GET(request, { params }) {
 
@@ -12,18 +12,6 @@ export async function GET(request, { params }) {
     return NextResponse.json(result[0]);
   } catch (error) {
     return NextResponse.json({ message: error.message });
-  }
-}
-
-export async function DELETE(request, { params }) {
-  try {
-    const { id } = params;
-
-    await pool.query("DELETE FROM product WHERE id = ?", [id]);
-    
-    return NextResponse.json({}, { status: 204 });
-  } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
 
