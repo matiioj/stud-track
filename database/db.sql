@@ -42,6 +42,18 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+CREATE TRIGGER CalculateAgeAfterUpdate
+AFTER UPDATE ON student
+FOR EACH ROW
+BEGIN
+    IF NEW.birthdate <> OLD.birthdate THEN
+        SET NEW.age = TIMESTAMPDIFF(YEAR, NEW.birthdate, CURDATE());
+    END IF;
+END;
+//
+DELIMITER ;
+
 -- Insert data into the student table with automatic age calculation
 INSERT INTO student (name, surname, birthdate) VALUES
     ('Alicia', 'Perez', '2006-09-10'),

@@ -26,7 +26,12 @@ export async function POST(request) {
       birthdate
     });
 
-    return NextResponse.json({ name, surname, birthdate });
+    return NextResponse.json({ 
+      name, 
+      surname, 
+      birthdate,
+      id: result.insertedId 
+    });
   } catch (error) {
     return NextResponse.json(
       { message: error.message },
