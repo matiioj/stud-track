@@ -43,13 +43,11 @@ END;
 DELIMITER ;
 
 DELIMITER //
-CREATE TRIGGER CalculateAgeAfterUpdate
-AFTER UPDATE ON student
+CREATE TRIGGER CalculateAgeBeforeUpdate
+BEFORE UPDATE ON student
 FOR EACH ROW
 BEGIN
-    IF NEW.birthdate <> OLD.birthdate THEN
-        SET NEW.age = TIMESTAMPDIFF(YEAR, NEW.birthdate, CURDATE());
-    END IF;
+    SET NEW.age = TIMESTAMPDIFF(YEAR, NEW.birthdate, CURDATE());
 END;
 //
 DELIMITER ;
