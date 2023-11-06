@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { pool } from "@/libs/mysql";
-
+import { pool } from "@/libs/mysql"
 export async function GET() {
   try {
     const results = await pool.query("SELECT * FROM student");
