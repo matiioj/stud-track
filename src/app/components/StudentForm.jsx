@@ -1,7 +1,18 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import {useRouter} from 'next/navigation';
+import { useParams } from 'next/navigation';
+
+export function formatDate(dateString, format = 'YYYY-MM-DD') {
+  const date = dayjs(dateString);
+  if (!date.isValid()) {
+    return '';
+  }
+
+  return date.format(format);
+}
 
 const StudentForm = () => {
     const [student,setStudent] = useState({
@@ -10,18 +21,41 @@ const StudentForm = () => {
       birthdate: '',
     });
     const form = useRef(null);
-    const router = useRouter()
+    const router = useRouter();
+    const params = useParams();
   
     const handleChange = (e) => {
       const { name, value } = e.target;
       setStudent({ ...student, [name]: value });
     };
+
+    useEffect(() => {
+      if(params.id){
+        axios.get(`http://localhost:3000/api/students/${params.id}`)
+          .then(res => {
+            console.log(res)
+            setStudent({
+              name: res.data[0].name,
+              surname:  res.data[0].surname,
+              birthdate:formatDate(res.data[0].birthdate)
+            })
+          })
+      }
+    }, [])
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const res = await axios.post('/api/students', student)
+
+      if (!params.id){
+      const res = await axios.post('http://localhost:3000/api/students', student);
+      
+      } else {
+        const res = await axios.put('http://localhost:3000/api/students/' + params.id, student);
+      }
+
       form.current.reset(); 
-      router.push('/students')
+      router.refresh();
+      router.push('/students'); 
     };
   
     return (
@@ -55,6 +89,7 @@ const StudentForm = () => {
               type="text"
               id="surname"
               name="surname"
+              placeholder="Surname"
               value={student.surname}
               onChange={handleChange}
             />
@@ -69,6 +104,7 @@ const StudentForm = () => {
               type="date"
               id="birthdate"
               name="birthdate"
+              placeholder="Birthdate"
               value={student.birthdate}
               onChange={handleChange}
             />
@@ -78,7 +114,7 @@ const StudentForm = () => {
             className="w-full py-2 px-4 bg-blue-500 text-white rounded font-bold hover:bg-blue-700"
             type="submit"
           >
-            Submit
+            {params.id ? "Update student" : "Add student"}
           </button>
         </form>
       </div>

@@ -1,4 +1,4 @@
-import FormPage from "../../new/page";
+import FormPage from '@/src/app/new/page';
 
 import React from 'react'
 
