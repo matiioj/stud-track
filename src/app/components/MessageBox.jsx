@@ -22,7 +22,7 @@ function MessageBox() {
           <button
             className="text-white bg-green-500 hover:bg-green-700 py-2 px-4 rounded transition duration-300"
             onClick={() => {
-              router.push(`/students/new`);
+              router.push(`/new`);
             }}
           >
             Add New Student

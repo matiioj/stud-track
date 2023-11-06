@@ -56,11 +56,8 @@ const ListStudents = () => {
                 </td>
                 <td className="text-gray-600 py-2 px-4 text-center">{student.age}</td>
                 <td className="flex justify-center py-2 px-4">
-                  <button
-                    className="bg-blue-500 text-white rounded py-1 px-2 mr-2"
-                    onClick={() => handleUpdate(student.id)}
-                  >
-                    Update
+                  <button className="bg-blue-500 text-white rounded py-1 px-2 mr-2">
+                    <Link href={`/students/edit/${student.id}`}>Update</Link>
                   </button>
                   <button className="bg-green-500 text-white rounded py-1 px-2 mr-2">
                     <Link href={`/students/${student.id}`}>See more</Link>
@@ -71,8 +68,9 @@ const ListStudents = () => {
                       if (confirm("Please confirm that you want to delete this student:")) {
                         const res = await axios.delete(`/api/students/${student.id}`);
                         if (res.status === 200) {
-                          router.push('./');
+                          router.push('/success');
                         }
+                        else{alert("Operation failed, please try again")}
                       }
                     }}
                   >
