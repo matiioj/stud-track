@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import {useRouter} from 'next/navigation'
+
+
 
 export function formatDate(dateString, format = 'YYYY-MM-DD') {
   const date = dayjs(dateString);
@@ -13,9 +16,10 @@ export function formatDate(dateString, format = 'YYYY-MM-DD') {
   return date.format(format);
 }
 
+
 const ListStudents = () => {
   const [students, setStudents] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchStudents = async () => {
       const response = await axios.get('/api/students');
@@ -26,18 +30,9 @@ const ListStudents = () => {
     fetchStudents();
   }, []);
 
-  const handleUpdate = (studentId) => {
-    <Link href={`/students/${studentId}`}></Link>
-  };
 
-  const handleSeeMore = (studentId) => {
-    <Link href={`/students/${studentId}`}></Link>
-  };
 
-  const handleDelete = (studentId) => {
-    console.log('Delete student:', studentId);
-    <Link href={`/students/${studentId}`}></Link>
-  };
+  
 
   return (
     <div className="flex flex-col items-center p-4 bg-white shadow-md rounded overflow-auto h-full">
@@ -82,7 +77,14 @@ const ListStudents = () => {
                   </button>
                   <button
                     className="bg-red-500 text-white rounded py-1 px-2"
-                    onClick={() => handleDelete(student.id)}
+                    onClick={async () => {
+                      if (confirm("Please confirm that you want to delete this student:")) {
+                        const res = await axios.delete(`/api/students/${student.id}`);
+                        if (res.status === 200) {
+                          router.push('./')
+                        }
+                      }
+                    }}
                   >
                     Delete
                   </button>

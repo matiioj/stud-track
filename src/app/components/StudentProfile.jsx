@@ -21,8 +21,6 @@ function StudentProfile({ ...student }) {
         <h3 className="text-2xl text-slate-600 pb-4">{formatDate(student.birthdate)}</h3>
         <h1 className="text-2xl text-slate-800 font-bold">Age</h1>
         <h3 className="text-2xl text-slate-600 pb-4">{student.age}</h3>
-        
-        
       </div>
     );
   }

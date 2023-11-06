@@ -20,9 +20,8 @@ const StudentForm = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const res = await axios.post('/api/students', student)
-      console.log(res)
       form.current.reset(); 
-      router.push('/list')
+      router.push('/students')
     };
   
     return (
