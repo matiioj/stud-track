@@ -15,7 +15,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/list" className="text-white hover:underline">
+            <Link href="/students" className="text-white hover:underline">
               Ver el registro de estudiantes
             </Link>
           </li>
