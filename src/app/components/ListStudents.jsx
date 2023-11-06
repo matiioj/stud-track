@@ -84,8 +84,11 @@ const ListStudents = () => {
       </div>
 
       <div className="flex justify-between mt-4">
-        <button className="bg-gray-400 text-white rounded py-2 px-4 mr-16">Back</button>
-        <button className="bg-blue-500 text-white rounded py-2 px-4">Add New Student</button>
+        <button className="bg-gray-400 text-white rounded py-2 px-4 mr-16"
+        onClick={() => {
+              router.back();
+            }}>Go back </button>
+        <button className="bg-blue-500 text-white rounded py-2 px-4"><Link href={`/new`}>Add New Student</Link></button>
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ const StudentForm = () => {
               id="name"
               name="name"
               value={student.name}
+              placeholder="Name"
               onChange={handleChange}
               autoFocus
             />

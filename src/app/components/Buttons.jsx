@@ -12,6 +12,7 @@ function Buttons({ studentId }) {
         onClick={async () => {
           if (confirm("Please confirm that you want to delete this student:")) {
             const res = await axios.delete("/api/students/" + studentId);
+            console.log(res)
             if (res.status === 200) {
               router.push("/students");
               router.refresh();
