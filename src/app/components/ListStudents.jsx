@@ -55,7 +55,7 @@ const ListStudents = () => {
                   {formatDate(student.birthdate)}
                 </td>
                 <td className="text-gray-600 py-2 px-4 text-center">{student.age}</td>
-                <td className="flex justify-center py-2 px-4">
+                <td className="flex justify-center py-2 px-4 items-center">
                   <button className="bg-blue-500 text-white rounded py-1 px-2 mr-2">
                     <Link href={`/students/edit/${student.id}`}>Update</Link>
                   </button>

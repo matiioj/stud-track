@@ -4,7 +4,6 @@
 
 body {
     @apply bg-gray-800 text-white;
-    @apply overflow-y-hidden;
 }
 
 .no-scrollbar {

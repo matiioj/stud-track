@@ -3,7 +3,7 @@ import ListStudents from '../components/ListStudents'
 
 function GeneralList() {
   return (
-    <div className='min-h-screen  p-4 .no-scrollbar'>
+    <div className='flex justify-center items-center h-full no-scrollbar'>
         <ListStudents></ListStudents>
     </div>
   )
